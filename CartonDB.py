@@ -1,4 +1,5 @@
-import cPickle as pickle
+import pickle
+import threading
 
 class StoredData:
     def __init__(self,path):
@@ -18,10 +19,12 @@ class Carton:
     def __init__(self,path):
         self.store=StoredData(path)    
         self.data=self.store.get()
+        self.lock = threading.Lock()
     def add(self,key,inputData):
-        self.data[key]=inputData
+        with self.lock:
+            self.data[key]=inputData
     def get(self,key):
-        return self.data[key]
+        return self.data.get(key)
     def delete(self,key):
         try:
             del self.data[key]
@@ -29,4 +32,5 @@ class Carton:
         except KeyError:
             return key+"does not exist"
     def save(self):
-        self.store.save(self.data)
+        with self.lock:
+            self.store.save(self.data)

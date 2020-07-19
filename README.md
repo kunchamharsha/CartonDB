@@ -21,5 +21,5 @@ Ideal for use in cases where you need a quick store before pushing to db, rather
 
 > db.delete(key)
 
-> db.save()
+> db.save() //save is more of a commit feature like in relational databases, that's when the data is flushed to the db store
 
