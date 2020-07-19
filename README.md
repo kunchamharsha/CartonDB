@@ -5,6 +5,8 @@
 It is a file based Key-Value DB that uses Python's Pickle to serialise data stored.
 Why use this ? It is super fast. Can write 3 million small key value pairs in 1 second.
 
+It uses locks to save the data, so it is thread safe too. 
+
 ## Use Cases
 
 Ideal for use in cases where you need a quick store before pushing to db, rather than making a network call to the caching server.
